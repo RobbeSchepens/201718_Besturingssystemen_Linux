@@ -139,27 +139,27 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - In welk bestand kan je de UID, gebruikersnaam, homedirectory, enz. van alle gebruikers terugvinden?
 
         ```
-        /PAD/NAAR/BESTAND
+        /etc/passwd
         ```
 
     - In welk configuratiebestand kan je al de bestaande gebruikersgroepen nakijken, en ook de gebruikers die lid zijn van elke groep?
 
         ```
-        /PAD/NAAR/BESTAND
+        /etc/group
         ```
 
     - In welk configuratiebestand vind je de *wachtwoorden* van alle gebruikers?
 
         ```
-        /PAD/NAAR/BESTAND
+        /etc/shadow
         ```
 
 5. Gebruikersgroepen aanmaken
     - Maak een groep aan met de naam `sporten`
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ groupadd sporten
+        
         ```
 
     - In welk configuratiebestand vind je het GID van deze groep terug?
