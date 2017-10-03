@@ -16,7 +16,9 @@
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving heel vlot de installatie later kan herhalen als dat nodig is.
 
-1. ...
+1. Klik op Nieuw in VirtualBox en selecter Linux > Fedora 64 bit.
+2. Maak een nieuwe, dynamisch gealloceerde schijf aan met als ruimte 20 GB.
+3. Stel alle instellingen die hierboven vernoemd worden in. 
 
 ## Linux installeren in een VirtualBox VM
 
@@ -41,7 +43,10 @@ Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat 
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is.
 
-1. ...
+1. Na alle instellingen goed gezet te hebben, voegen we bij Opslag een nieuw optisch station toe.
+2. Selecteer de iso van Fedora 25.
+3. Start de VM op.
+4. Doorloop het installatieproces van Fedora 25 met de juiste instellingen vernoemd hierboven.
 
 ## Nieuwe software installeren
 
@@ -59,7 +64,11 @@ Installeer optioneel de “VirtualBox Guest Additions” (zie procedure in de st
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is.
 
-1. ...
+1. In Terminal, type het command sudo dnf -y update voor alle huidige software te updaten. Daarna: 
+2. sudo dnf -y install vim-enhanced.
+3. sudo dnf -y install nano
+4. sudo yum install vim-X11
+5. sudo yum install ShellCheck
 
 ## Gebruikers en groepen aanmaken
 
@@ -71,59 +80,59 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Wat is het commando om de huidige directory op te vragen? Welke uitvoer toont het commando?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ pwd
+        /home/srobbe
         ```
 
     - Wat is het UID van deze gebruiker?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ id -u
+        1000
         ```
 
     - Wat is het GID van deze gebruiker?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ id -g
+        1000
         ```
 
 2. Log in als de `root`-gebruiker met het commando `su -` (let op de spatie!)
     - Wat is de home-directory van `root`?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ pwd
+        /root
         ```
 
     - Wat is het UID van deze gebruiker?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ id -u
+        0
         ```
 
     - Wat is het GID van deze gebruiker?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ id -g
+        0
         ```
 
 3. Maak een nieuwe gebruiker aan met de naam `alice`, zonder specifieke opties
     - Geef het gebruikte commando:
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ useradd alice
+        
         ```
 
     - Voorzie een geschikt wachtwoord voor deze gebruiker (en vergeet het niet! Noteer het eventueel hier in je verslag of in de beschrijving van je VM)
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ passwd alice
+        Alice2017
         ```
 
 4. Configuratiebestanden voor gebruikersbeheer:
