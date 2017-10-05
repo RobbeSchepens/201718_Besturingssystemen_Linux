@@ -300,3 +300,9 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
 - dnf is het commando om geinstalleerde software te beheren.
 
 - sudo dnf -y upgrade om alle updates te downloaden en installeren
+
+## Bronnen 
+
+- Slides
+
+- Cobbaut, VIII Local User Management p266+
