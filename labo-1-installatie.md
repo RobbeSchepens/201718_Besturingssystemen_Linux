@@ -293,3 +293,10 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
         UITVOER
         ```
 
+## Statements uit pretest
+
+- Een nieuwe VM in VirtualBox krijgt als netwerkinterface standaard NAT.
+
+- dnf is het commando om geinstalleerde software te beheren.
+
+- sudo dnf -y upgrade om alle updates te downloaden en installeren
