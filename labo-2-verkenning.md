@@ -5,22 +5,22 @@
 1. Hoe vraag je op de command-line documentatie op voor het *commando* `passwd`?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ man passwd
+    [manual]
     ```
 
 2. Hoe vraag je documentatie op voor het *configuratiebestand* `/etc/passwd`?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ man config passwd
+    [manual]
     ```
 
 3. Hoe vraag je een lijst op van alle documentatie die de string `passwd` bevat?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ man -k passwd
+    20-tal regels zoals chgpasswd... chpasswd...
     ```
 
 ## Werken op de command-line
@@ -28,28 +28,28 @@
 1. Wat is de huidige datum en uur?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ date
+    Thu Oct  5 11:58:37 CEST 2017
     ```
 
 2. Wat is de huidige directory?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ pwd
+    /home/srobbe
     ```
 
 3. Toon de inhoud van de huidige directory. De uitvoer zou er ongeveer zo moeten uit zien:
 
     ```
-    $ COMMANDO
+    $ ls
     Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
     ```
 
 4. Toon de inhoud van de huidige directory, maar toon voor elk bestand meer informatie en ook "verborgen" bestanden.
 
     ```
-    $ COMMANDO
+    $ ls -l -a
     total 96
     drwx------. 14 student student 4096 Sep 24 09:14 .
     drwxr-xr-x.  3 root    root    4096 Sep 20 13:46 ..
@@ -68,23 +68,28 @@
 5. Toon de inhoud van de hoofddirectory van het Linux-systeem, ook vaak de root-directory genoemd. Geef een uitgebreide listing zoals in de vorige vraag, maar *zonder* verborgen bestanden.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls -l ~
+    drwxrwxr-x. 2 srobbe srobbe 4.1k 2017-10-03 08:21 bin
+    drwxr-xr-x. 2 srobbe srobbe 4.1k 2017-09-28 11:20 Desktop
+    drwxr-xr-x. 2 srobbe srobbe 4.1k 2017-09-28 11:20 Documents
+    drwxr-xr-x. 2 srobbe srobbe 4.1k 2017-09-28 11:20 Downloads
+    drwxrwxr-x. 5 srobbe srobbe 4.1k 2017-10-03 18:10 ilnx-RobbeSchepens
+    [...]
     ```
 
 6. Wat betekenen volgende elementen van de uitvoer hierboven?
-    - 1e kolom (bv. `drwxr-xr-x.`): ...
+    - 1e kolom (bv. `drwxr-xr-x.`): Bepaalde properties van het bestaat omzake lezen/schrijven/execute
     - 2e kolom (getal): ...
     - 3e kolom (bv. `root`, `student`): ...
     - 4e kolom (bv. `root`): ...
-    - 5e kolom (getal): ...
-    - 6e - 8e kolom (datum): ...
-    - de aanduiding `->` (bv. `bin -> usr/bin`): ...
+    - 5e kolom (getal): Aantal bytes dat het bestand inneemt
+    - 6e - 8e kolom (datum): Laatst bewerkte datum
+    - de aanduiding `->` (bv. `bin -> usr/bin`): Shortcut/verwijst naar
+
 7. Hoe kan je commando's die je voordien uitgevoerd hebt terug ophalen (de "commandogeschiedenis")?
 
     ```
-    $ COMMANDO
-    UITVOER
+    Pijltje naar boven
     ```
 
 ## De plaats van bestanden op een Linux-systeem
@@ -441,3 +446,18 @@ Maak in de directory `linux/` twee tekstbestanden aan, met naam `tekst1a` en `te
     UITVOER
     ```
 
+## Bronnen
+
+- Cobbaut, Chapter 7. man pages
+
+- Cobbaut, Chapter 11, “the Linux file tree”
+
+- Cobbaut, Chapter 8, “Working with directories”
+
+- Cobbaut, Chapter 9, “Working with files”
+
+- Cobbaut, Chapter 35, “File links"
+
+- Cobbaut, Chapter 22, "Introduction to Vi"
+
+- Slides
