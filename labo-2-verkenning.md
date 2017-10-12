@@ -79,9 +79,9 @@
 
 6. Wat betekenen volgende elementen van de uitvoer hierboven?
     - 1e kolom (bv. `drwxr-xr-x.`): Bepaalde properties van het bestaat omzake lezen/schrijven/execute
-    - 2e kolom (getal): ...
-    - 3e kolom (bv. `root`, `student`): ...
-    - 4e kolom (bv. `root`): ...
+    - 2e kolom (getal): 
+    - 3e kolom (bv. `root`, `student`): Aangemaakt door
+    - 4e kolom (bv. `root`): Laatst gewijzigd door
     - 5e kolom (getal): Aantal bytes dat het bestand inneemt
     - 6e - 8e kolom (datum): Laatst bewerkte datum
     - de aanduiding `->` (bv. `bin -> usr/bin`): Shortcut/verwijst naar
@@ -98,20 +98,20 @@ Vul de tabel hieronder aan. In de linkerkolom vind je de namen van een directory
 
 | Directory                         | Inhoud                                                  |
 | :---                              | :---                                                    |
-| `/bin`, `/usr/bin`                | **ANTWOORD**                                            |
-| **`ANTWOORD`**                    | Uitvoerbare bestanden voor systeembeheertaken           |
-| `/var`                            | **ANTWOORD**                                            |
-| **`ANTWOORD`**                    | Tijdelijke bestanden                                    |
-| `/opt`, `/usr/local`              | **ANTWOORD**                                            |
-| **`ANTWOORD`**                    | Home-directory van de `root` gebruiker                  |
-| **`ANTWOORD`**                    | Home-directory van de gebruiker `student`               |
-| **`ANTWOORD`**                    | De inhoud van de man-pages                              |
-| **`ANTWOORD`**                    | Andere documentatie                                     |
-| `/lib`, `/usr/lib`, `lib64`, enz. | **ANTWOORD**                                            |
-| **`ANTWOORD`**                    | De inhoud van de installatie-cd voor Guest Additions(*) |
-| `/dev`                            | **ANTWOORD**                                            |
-| `/proc`                           | **ANTWOORD**                                            |
-| **`ANTWOORD`**                    | Systeemconfiguratiebestanden                            |
+| `/bin`, `/usr/bin`                | Prullenmand                                             |
+| **`/sbin`**                       | Uitvoerbare bestanden voor systeembeheertaken           |
+| `/var`                            | Bestanden waarvan men vooraf niet weet hoe groot ze zijn zoals logbestanden |
+| **`/tmp`**                        | Tijdelijke bestanden                                    |
+| `/opt`, `/usr/local`              | Optionele, geinstalleerde software                      |
+| **`~`**                           | Home-directory van de `root` gebruiker                  |
+| **`/home/student`**               | Home-directory van de gebruiker `student`               |
+| **`/usr/share/man`**              | De inhoud van de man-pages                              |
+| **`/usr/share/doc`**              | Andere documentatie                                     |
+| `/lib`, `/usr/lib`, `lib64`, enz. | Libraries die gebruikt kunnen worden door programma's   |
+| **`/media/srobbe/VBOXADDITIONS_4.2.12_84980/`**   | De inhoud van de installatie-cd voor Guest Additions(*) |
+| `/dev`                            | Bestanden niet op de schijf maar dient om hardware te herkennen |
+| `/proc`                           | Toont wat de kernel beheert                             |
+| **`/sbin`**                            | Systeemconfiguratiebestanden                            |
 
 (*) Je kan het insteken van de cd simuleren in het VirtualBox-venster van je VM in het menu "Devices" > "Insert Guest Additions CD image..." (of het Nederlandstalige equivalent).
 
@@ -129,36 +129,36 @@ In deze oefening leer je onderscheid maken tussen *relatieve* en *absolute paden
 1. Blijf in je home-directory en maak van hieruit een directory `tijdelijk/` aan onder `/tmp/`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mkdir /tmp/tijdelijk
+    
     ```
 
 2. Verwijder deze directory meteen
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rmdir /tmp/tijdelijk
+    
     ```
 
 3. Maak onder je home-directory een submap aan met de naam `linux/`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mkdir ~/linux
+    
     ```
 
 4. Ga naar deze directory
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cd ~/linux
+    
     ```
 
 5. Maak met één commando de subdirectory `a/b/` aan onder `linux/`. Als je nadien het commando `tree` geeft, moet je de gegeven uitvoer zien.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mkdir -p a/b
+    
     $ tree
     .
     └── a
@@ -169,15 +169,15 @@ In deze oefening leer je onderscheid maken tussen *relatieve* en *absolute paden
 6. Verwijder directory `b/` en daarna `a/` (in twee commando's)
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rmdir a/b rmdir a
+    
     ```
 
 7. Maak met één commando deze directorystructuur aan.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mkdir -p c/{d,e}
+    
     $ tree
     .
     └── c
@@ -189,14 +189,14 @@ In deze oefening leer je onderscheid maken tussen *relatieve* en *absolute paden
 8. Verwijder in één commando de directory `c/` en alle onderliggende
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rm -r c
+    
     ```
 
 9. Maak met één commando deze directorystructuur aan. Het is de bedoeling de opdrachtregel zo kort mogelijk te maken, dus niet alle directories apart opgeven!
 
     ```
-    $ COMMANDO
+    $ mkdir -p f/{g,h}/i
     UITVOER
     $ tree
     .
@@ -216,51 +216,51 @@ Behoud deze directorystructuur voor de volgende oefeningen over bestanden.
 1. Maak een leeg bestand aan met de naam `file1`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ touch file1
+    
     ```
 
 2. Maak een *verborgen* bestand aan met de naam `hidden`. Verborgen betekent dat je het niet kan zien met een "gewone" `ls`, maar wel met de gepaste optie.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ touch .hidden
+    
     ```
 
 3. Tik volgend commando in, leg uit wat er hier precies gebeurt, wat het effect is.
 
     ```
-    $ echo hello world > file2"
+    $ echo "hello world">file2
     ```
 
-    **Antwoord:** 
+    **Antwoord:** Maakt een file2 aan als die nog niet bestaat en vervangt de inhoud met de tekst hello world. 
 
 4. Toon de inhoud van `file2`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ vi file2
+    1 hello world
     ```
 
 5. Kopieer `file1` naar een nieuw bestand `file3` in de huidige directory
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cp file1 file3
+    
     ```
 
 6. Kopieer `file1` naar de directory `f/` (die zou je nog moeten hebben van vorige oefening)
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cp file1 f/
+    
     ```
 
 7. Kopieer `file1` en file2 in één keer naar `f/g/`. Je zou de gegeven situatie moeten krijgen.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cp {file1,file2} f/g/
+    
     $ tree
     .
     ├── f
@@ -279,22 +279,24 @@ Behoud deze directorystructuur voor de volgende oefeningen over bestanden.
 8. *Hernoem* `file3` naar `file4`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rename file3 file4 file3 
+    Verander de tekst in naam file3 naar file4 en doe dat voor het bestand file3 (kan desnoods zelf alle files *)
+    Alternatief:
+    $ mv file3 file4
     ```
 
 9. Verplaats `file2` naar directory `f/`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mv file2 f/
+    
     ```
 
 10. Verplaats `file1` en `file4` in één keer naar `f/h/`. Je zou de gegeven situatie moeten krijgen.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ mv {file1,file4} f/h/
+    
     $ tree
     .
     └── f
@@ -315,8 +317,8 @@ Behoud deze directorystructuur voor de volgende oefeningen over bestanden.
 11. Kopieer `f/h/`, inclusief de inhoud, naar een nieuwe directory `f/j/`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cp -r f/h f/j
+    
     ```
 
 ### Pathname expansion (of *file globbing*)
@@ -337,113 +339,126 @@ Toon met `ls` telkens de gevraagde bestanden, niet meer en niet minder.
 1. Alle bestanden die beginnen met `file`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file*
+    Alle files
     ```
 
 2. Alle bestanden die beginnen met `file`, gevolgd door één letterteken (cijfer of letter)
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file[?0-9a-zA-Z]
+    $ ls file?
+    file1  file2  file3  file4  file5  file6  file7  file8  file9  filea  fileb  filec  filed
     ```
 
 3. Alle bestanden die beginnen met `file`, gevolgd door één letter, maar geen cijfer
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file[a-zA-Z]
+    filea  fileb  filec  filed
     ```
 
 4. Alle bestanden die beginnen met `file`, gevolgd door één cijfer, maar geen letter
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file[0-9]
+    file1  file2  file3  file4  file5  file6  file7  file8  file9
     ```
 
 5. De bestanden `file12` t/m `file16`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file1[2-6]
+    file12  file13  file14  file15  file16
     ```
 
-6. Bestandern die beginnen met `file`, *niet* gevolgd door een `1`
+6. Bestanden die beginnen met `file`, *niet* gevolgd door een `1`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls file[^1]*
+    file2  file3  file4  file5  file6  file7  file8  file9  filea  fileb  filec  filed
     ```
 
 ### Links
 
-Maak in de directory `linux/` twee tekstbestanden aan, met naam `tekst1a` en `tekst2a`. Beide hebben als inhoud “Dit is bestand tekst1” en “Dit is bestand tekst2”, respectievelijk.
+Maak in de directory `linux/` twee tekstbestanden aan, met naam `tekst1a` en `tekst2a`. Beide hebben als inhoud “Dit is bestand tekst1” en “Dit is bestand tekst2”, respectievelijk. $ touch tekst{1,2}a $ echo "Dit is bestand tekst1">tekst1a
 
 1. Voor het volgende commando uit en geef de uitvoer:
 
     ```
     $ ls -l tekst*
-    UITVOER
+    -rw-rw-r--. 1 srobbe srobbe 22 2017-10-12 12:12 tekst1a
+    -rw-rw-r--. 1 srobbe srobbe 22 2017-10-12 12:12 tekst2a
     ```
 
-2. Maak een *harde link* van `tekst1a` naar `tekst1b`
-3. Maak een *symbolische link* van `tekst2a` naar `tekst2b`
+2. Maak een *harde link* van `tekst1a` naar `tekst1b` $ ln tekst1a tekst1b
+3. Maak een *symbolische link* van `tekst2a` naar `tekst2b` $ ln -s tekst2a tekst2b
 4. Voor het volgende commando uit en geef de uitvoer:
 
     ```
     $ ls -l tekst*
-    UITVOER
+    -rw-rw-r--. 2 srobbe srobbe 22 2017-10-12 12:12 tekst1a
+    -rw-rw-r--. 2 srobbe srobbe 22 2017-10-12 12:12 tekst1b
+    -rw-rw-r--. 1 srobbe srobbe 22 2017-10-12 12:12 tekst2a
     ```
 
 5. Hoe zie je aan de uitvoer van `ls` dat `tekst1b` een harde link is en `tekst2b` een symbolische? Tip: Vergelijk met de uitvoer uit vraag 1!
 
-    **Antwoord**: ...
+    **Antwoord**: Een harde link lijkt als andere bestanden maar heeft in de tweede kollom een cijfer 2. Een symbolische link heeft de cyaan kleur met een referentie naar het origineel -> tekst2a. 
 
 6. Verwijder de oorspronkelijke bestanden, `tekst1a` en `tekst2a`. Maak het commando zo kort mogelijk!
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rm tekst{1,2}a
+    
     ```
 
 7. Toon opnieuw de uitvoer van `ls -l tekst*`, en bekijk de inhoud van `tekst1b` en `tekst2b`. Wat valt je op?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ vi tekst1b
+    
     ```
 
-    **Antwoord**: ...
+    **Antwoord**: tekst1b heeft zijn inhoud nog, tekst2b niet meer. 
 
 ### Bestanden archiveren
 
 1. Creëer in je home-directory een archief `linux.tar.bz2` van de directory `linux/` en alle inhoud.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ tar -cvf linux.tar.bz2 linux/
+    [...]
+    linux/file3
+    linux/file10
+    linux/file16
     ```
 
 2. Verwijder nu volledig de directory `linux/`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ rm -r linux
+    
     ```
 
 3. Toon de inhoud van het archief zonder opnieuw uit te pakken
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ tar -tf linux.tar.bz2
+    [...]
+    linux/file3
+    linux/file10
+    linux/file16
     ```
 
 4. Pak het archief opnieuw uit in je home-directory.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ tar -xvf linux.tar.bz2
+    [...]
+    linux/file3
+    linux/file10
+    linux/file16
     ```
 
 ## Bronnen
