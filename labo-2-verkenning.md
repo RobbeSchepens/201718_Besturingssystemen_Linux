@@ -238,7 +238,7 @@ Behoud deze directorystructuur voor de volgende oefeningen over bestanden.
 4. Toon de inhoud van `file2`
 
     ```
-    $ vi file2
+    $ cat file2
     1 hello world
     ```
 
@@ -416,7 +416,7 @@ Maak in de directory `linux/` twee tekstbestanden aan, met naam `tekst1a` en `te
 7. Toon opnieuw de uitvoer van `ls -l tekst*`, en bekijk de inhoud van `tekst1b` en `tekst2b`. Wat valt je op?
 
     ```
-    $ vi tekst1b
+    $ cat tekst1b
     
     ```
 
