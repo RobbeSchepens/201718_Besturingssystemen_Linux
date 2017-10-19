@@ -31,55 +31,55 @@ Maak ook een bestand aan met de naam `autokentekens` met deze inhoud:
 1. Hoe start je Vi op om deze bestanden aan te maken?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ vim landen
+    Zet je in de VIM editor
     ```
 
 2. Hoe ga je van *normal mode* naar *insert mode*? Geef verschillende manieren:
 
     | Invoegen vanaf                  | Commando |
     | :---                            | :---     |
-    | op de huidige cursorpositie     | `X`      |
-    | rechts van de cursor            | `X`      |
-    | begin van huidige regel         | `X`      |
-    | einde van huidige regel         | `X`      |
-    | regel toevoegen onder deze      | `X`      |
-    | regel toevoegen op huidige lijn | `X`      |
+    | op de huidige cursorpositie     | `a`      |
+    | rechts van de cursor            | `A`      |
+    | begin van huidige regel         | `i`      |
+    | einde van huidige regel         | `I`      |
+    | regel toevoegen onder deze      | `o`      |
+    | regel toevoegen op huidige lijn | `O`      |
 
 3. Hoe kopieer je vanuit *normal mode*?
 
     | Te kopiëren                              | Commando |
     | :---                                     | :---     |
-    | Huidige regel                            | `X`      |
-    | Huidige regel en die eronder             | `X`      |
-    | Het huidige woord                        | `X`      |
-    | Het huidige en de twee volgende woorden  | `X`      |
-    | Van de cursor tot het einde van de regel | `X`      |
-    | Tot het einde van de *zin*               | `X`      |
-    | Tot het einde van de *paragraaf*         | `X`      |
-    | Alle tekst tussen haakjes `(...)`        | `X`      |
+    | Huidige regel                            | `yy`      |
+    | Huidige regel en die eronder             | `2yy`      |
+    | Het huidige woord                        | `yiw`      |
+    | Het huidige en de twee volgende woorden  | `y3w`      |
+    | Van de cursor tot het einde van de regel | `yf$`      |
+    | Tot het einde van de *zin*               | `y)`      |
+    | Tot het einde van de *paragraaf*         | `y}`      |
+    | Alle tekst tussen haakjes `(...)`        | `yi)`      |
 
 4. Hoe knip je tekst vanuit *normal* mode?
 
     | Te knippen                                  | Commando |
     | :---                                        | :---     |
-    | Huidige regel                               | `X`      |
-    | Huidige regel en die eronder                | `X`      |
-    | Het huidige woord                           | `X`      |
-    | Het huidige en de twee volgende woorden     | `X`      |
-    | Het letterteken op de positie van de cursor | `X`      |
-    | Van de cursor tot het einde van de regel    | `X`      |
-    | Tot het einde van de *zin*                  | `X`      |
-    | Tot het einde van de *paragraaf*            | `X`      |
-    | Alle tekst tussen haakjes `(...)`           | `X`      |
+    | Huidige regel                               | `dd`      |
+    | Huidige regel en die eronder                | `2dd`      |
+    | Het huidige woord                           | `diw`      |
+    | Het huidige en de twee volgende woorden     | `d3w`      |
+    | Het letterteken op de positie van de cursor | `d`      |
+    | Van de cursor tot het einde van de regel    | `df$`      |
+    | Tot het einde van de *zin*                  | `d)`      |
+    | Tot het einde van de *paragraaf*            | `d}`      |
+    | Alle tekst tussen haakjes `(...)`           | `di)`      |
 
 6. Hoe kan je gekopieerde/geknipte tekst plakken?
 
 
     | Tekst plakken          | Commando |
     | :---                   | :---     |
-    | Rechts/onder de cursur | `X`      |
-    | Op de cursur           | `X`      |
+    | Rechts/onder de cursur | `p`      |
+    | Op de cursur           | `P`      |
 
 De bedoeling van voorgaande oefening is om een idee te geven van hoe veelzijdig Vi is. Er zijn *veel* commando's, maar er zit een duidelijke logica in. Een voorbeeld is `ci{`: dit staat voor *Change inside braces*. Vim zal links en rechts van de cursor zoeken naar accolades, alle tekst ertussen verwijderen en naar insert mode gaan. Je kan in het commando de `{` vervangen door een ander teken zoals bv. `(`, `"`, `'`, `[`, `<`.
 
@@ -92,14 +92,13 @@ In onderstaande vragen is het telkens de bedoeling één commando te geven om de
 1. Voeg het bestand `landen` en `autokentekens` samen met het commando `join` (zoek de werking ervan op met het man-commando). Het resultaat wordt opgeslagen in het bestand `landenkentekens`.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ join landen autokentekens > landenkentekens
     ```
 
 2. Bekijk de inhoud van `landenkentekens` en controleer of het overeenkomt met de uitvoer hieronder.
 
     ```
-    $ COMMANDO
+    $ cat landenkentekens
     1 België B
     2 Frankrijk F
     3 Zwitserland CH
@@ -110,14 +109,13 @@ In onderstaande vragen is het telkens de bedoeling één commando te geven om de
 3. Haal uit `landenkentekens` alleen kolom 2 en kolom 3 eruit en sla dit resultaat op als `landenkentekens2`.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cut -d" " -f2,3 landenkentekens > landenkentekens2
     ```
 
 4. Controleer of de inhoud van `landenkentekens2` overeenkomt met de uitvoer hieronder.
 
     ```
-    $ COMMANDO
+    $ cat landenkentekens2
     België B
     Frankrijk F
     Zwitserland CH
@@ -128,16 +126,18 @@ In onderstaande vragen is het telkens de bedoeling één commando te geven om de
 5. Voeg vanop de command-line Italië en Spanje toe aan het einde van `landenkentekens2` met hun respectievelijke kentekens. Je mag hier voor elk land een apart commando gebruiken.
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ cat >>landenkentekens2<< EOF
+    > Italie I
+    > Spanje S
+    > EOF
     ```
 
 6. Sorteer `landenkentekens2` alfabetisch op de autokentekens. Sla het bekomen resultaat op in `gesorteerdeautokentekens`. Controleer het resultaat.
 
     ```
-    $ COMMANDO
-    UITVOER
-    $ COMMANDO
+    $ sort -k2 landenkentekens2 > gesorteerdeautokentekens
+    
+    $ cat landenkentekens2
     België B
     Zwitserland CH
     Duitsland D
@@ -276,4 +276,18 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 
 ## Gebruikte bronnen
 
-Vul hier aan welke interessante informatiebronnen je tegengekomen bent.
+* Cobbaut, Chapter 18 “I/O redirection”
+
+* Cobbaut, Chapter 21 “Regular expressions”
+
+* Cobbaut, Chapter 19 “Filters”
+
+* Linuxfun p223
+
+* [Vim Wikia Copy, cut & paste](http://vim.wikia.com/wiki/Copy,_cut_and_paste)
+
+* [VIM cheatsheet](www.worldtimzone.com/res/vi.html)
+
+* [Wow! I Didn't Know You Could Do That In vi](https://www.eskimo.com/~pbender/misc-non/vi-help.txt)
+
+* [Key for VI/VIM](https://in-the-sky.org/work/vi.php)
