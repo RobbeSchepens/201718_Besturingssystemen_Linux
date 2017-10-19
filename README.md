@@ -4,11 +4,11 @@ In deze repository vind je de labo-oefeningen voor Besturingssystemen/Linux van 
 
 ## Gegevens student
 
-- Naam: 
-- Klasgroep: 
-- Naam van je lector: Nathalie Declercq / Andy Van Maele / Bert Van Vreckem (schrap wat niet past)
-- Github gebruikersnaam: [GEBRUIKER](https://github.com/GEBRUIKER)
-- URL naar je Github-repository: <https://github.com/HoGentTIN/ilnx-GEBRUIKER>
+- Naam: Robbe Schepens
+- Klasgroep: A2
+- Naam van je lector: Nathalie Declercq / ~Andy Van Maele~ / ~Bert Van Vreckem~ (schrap wat niet past)
+- Github gebruikersnaam: [Robbe Schepens](https://github.com/RobbeSchepens)
+- URL naar je Github-repository: <https://github.com/HoGentTIN/ilnx-RobbeSchepens>
 
 ## Verslagen bijhouden
 
@@ -19,10 +19,8 @@ Wanneer je Linux-VM nog niet geïnstalleerd is, kan je je verslagen rechtstreeks
 Zorg eerst dat Git geïnstalleerd en geconfigureerd is op je VM (zie het leerpad, *[1.2.2. Configuratie Git](https://chamilo.hogent.be/index.php?application=Chamilo%5CApplication%5CWeblcms&go=CourseViewer&course=25355&tool=LearningPath&tool_action=ComplexDisplay&publication=1129388&preview_content_object_id=2846944&learning_path_action=Viewer&child_id=68023)*). Daarna kan je de repo klonen met het commando:
 
 ```ShellSession
-$ git clone git@github.com:HoGentTIN/ilnx-GEBRUIKER.git
+$ git clone git@github.com:HoGentTIN/ilnx-RobbeSchepens.git
 ```
-
-waar `GEBRUIKER` je Github-gebruikersnaam is.
 
 ## Cheat sheet
 
