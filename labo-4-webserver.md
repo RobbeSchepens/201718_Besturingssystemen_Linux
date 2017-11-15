@@ -16,29 +16,56 @@ Het is belangrijk dat je controleert voordat je aan dit labo begint, dat je twee
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is. Test ook telkens na elke stap dat die correct verlopen is.
 
-1. ...
+0. `su`
+1. `dnf install httpd -y` in Terminal. 
+2. `systemctl enable httpd` Enable the httpd service to start automatically on every reboot
+3. `systemctl start httpd` Start httpd service
+4. Test op `http://192.168.56.101/`
 
 ## MariaDB (MySQL)
 
 MariaDB is de naam van een variant (fork) van de bekende database MySQL. Onder Fedora is MySQL zelf niet meer beschikbaar, maar MariaDB is volledig compatibel. Installeer MariaDB op je virtuele machine. Voer daarna het script `mysql_secure_installation` uit om het root-wachtwoord voor MariaDB in te stellen. Installeer ook PHPMyAdmin, dit is een webinterface voor het beheer van MySQL/MariaDB.
 
-
 ### Procedure
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is. Test ook telkens na elke stap dat die correct verlopen is.
 
-1. ...
+1. `dnf install mariadb mariadb-server -y`
+2. `systemctl enable mariadb` Enable mariadb service at boot time
+3. `systemctl start mariadb` Start mariadb service
+4. Root passwoord instellen via `mysql_secure_installation`
+5. PHP installeren `dnf install php -y`
+6. PHP testen
+    - `vi /var/www/html/testphp.php`
+    - Voeg `<?php phpinfo(); ?>` toe en daarna `:wq`
+    - `systemctl restart httpd` Restart apache service
+    - Go to `http://192.168.56.101/testphp.php`
+7. PHP Modules installeren via `dnf search php`
+8. php moduule mysql installeren via `dnf install php-mysqlnd -y` en refresh `systemctl restart httpd`
+9. PHPMyAdmin installeren via `dnf install phpmyadmin -y` en refresh `systemctl restart httpd`.
+    - Test via `http://192.168.56.101/phpmyadmin` als het op remote host geconfigureerd is, maar dit is niet nodig voor ons:
+    - Test via localhost: `http://localhost/phpmyadmin/` user root met pw Admin2017 
 
 ## Webapplicatie
 
 Kies een webapplicatie gebaseerd op PHP en installeer op je webserver. Enkele voorbeelden die je kan gebruiken: Drupal, Wordpress, Joomla, MediaWiki, enz.,
 
-
 ### Procedure
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is. Test ook telkens na elke stap dat die correct verlopen is.
 
-1. ...
+#### Wordpress installatie
+
+1. Onder PHPMyAdmin > SQL tab > `CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;` > RUN 
+2. Install modules `dnf install php-curl php-gd php-mbstring php-mcrypt php-xml php-xmlrpc`
+3.  Currently, the use of .htaccess files is disabled. WordPress and many WordPress plugins use these files extensively for in-directory tweaks to the web server's behavior.
+4. `vi /etc/apache2/apache2.conf` en noteer
+
+```
+<Directory /var/www/html/>
+    AllowOverride All
+</Directory>
+```
 
 ## Netwerkconfiguratie en troubleshooting
 
@@ -141,4 +168,8 @@ Om oorzaken te vinden van problemen op een Linux-systeem, maken systeembeheerder
 
 ## Gebruikte bronnen
 
-- 
+- [Unixman How To Install LAMP Stack](https://www.unixmen.com/how-to-install-lamp-stack-in-fedora-23/)
+
+- [Digital Ocean: Wordpress with LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04)
+
+- [FedoraMagazine: Wordpress on LAMP Stack Fedora](https://fedoramagazine.org/howto-install-wordpress-fedora/)
