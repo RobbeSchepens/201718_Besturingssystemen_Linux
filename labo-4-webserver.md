@@ -33,7 +33,7 @@ Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat 
 1. `dnf install mariadb mariadb-server -y`
 2. `systemctl enable mariadb` Enable mariadb service at boot time
 3. `systemctl start mariadb` Start mariadb service
-4. Root passwoord instellen via `mysql_secure_installation`
+4. Root passwoord instellen via `mysql_secure_installation` (best user rootdb noemen, maar bij mij is root)
 5. PHP installeren `dnf install php -y`
 6. PHP testen
     - `vi /var/www/html/testphp.php`
@@ -46,6 +46,30 @@ Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat 
     - Test via `http://192.168.56.101/phpmyadmin` als het op remote host geconfigureerd is, maar dit is niet nodig voor ons:
     - Test via localhost: `http://localhost/phpmyadmin/` user root met pw Admin2017 
 
+## SSL / HTTPS
+
+### Procedure
+
+```
+dnf -y install mod_ssl
+vi /etc/httpd/conf.d/ssl.conf (Niets veranderen)
+```
+
+#### Firewall
+```
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+firewall-cmd --reload
+```
+
+#### Info & commands
+
+- `cd /var/www/html/` Map van alle wwws
+- `php bla.php` Runt het phpfile in de command om errors te tonen
+- `mysql -u root -p` Gaat in mysql service
+- `show database; connect mysql; show tables;`
+- `cd /etc/httpd/`
+
 ## Webapplicatie
 
 Kies een webapplicatie gebaseerd op PHP en installeer op je webserver. Enkele voorbeelden die je kan gebruiken: Drupal, Wordpress, Joomla, MediaWiki, enz.,
@@ -54,7 +78,7 @@ Kies een webapplicatie gebaseerd op PHP en installeer op je webserver. Enkele vo
 
 Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat je aan de hand van je beschrijving deze taken later heel vlot kan herhalen als dat nodig is. Test ook telkens na elke stap dat die correct verlopen is.
 
-#### Wordpress installatie
+~~#### Wordpress installatie~~
 
 1. Onder PHPMyAdmin > SQL tab > `CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;` > RUN 
 2. Install modules `dnf install php-curl php-gd php-mbstring php-mcrypt php-xml php-xmlrpc`
@@ -66,6 +90,10 @@ Beschrijf hier de exacte procedure hoe je dit uitgevoerd hebt. Zorg er voor dat 
     AllowOverride All
 </Directory>
 ```
+
+#### Drupal installatie
+
+`dnf install -y drupal8`
 
 ## Netwerkconfiguratie en troubleshooting
 
@@ -173,3 +201,5 @@ Om oorzaken te vinden van problemen op een Linux-systeem, maken systeembeheerder
 - [Digital Ocean: Wordpress with LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04)
 
 - [FedoraMagazine: Wordpress on LAMP Stack Fedora](https://fedoramagazine.org/howto-install-wordpress-fedora/)
+
+- 4.3 Extra Info leerpad
