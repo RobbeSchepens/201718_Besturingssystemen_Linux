@@ -156,7 +156,9 @@ Sommige van onderstaande oefeningen maken gebruik van specifieke tekstbestanden 
 1. Bekijk de uitvoer van het commando `ip a` (opvragen van de IP-adressen van deze host). Filter de IPv4 (niet IPv6) adressen er uit:
 
     ```
-    $ COMMANDO
+    $ ip a | grep 'inet ' | tr -s ' ' | cut -d' ' -f3
+    $ ip a | grep inet | grep -v inet6 (weglaten) | tr -s ' ' | cut -d' ' -f3
+    $ ip a | grep -w inet | tr -s ' ' | cut -d' ' -f3    
     127.0.0.1/8
     10.0.2.15/24
     192.168.56.101/24
@@ -166,17 +168,17 @@ Sommige van onderstaande oefeningen maken gebruik van specifieke tekstbestanden 
 
 Deze oefeningen gebeuren met `lorem.txt`
 
-1. Tel het aantal regels, wooren en tekens in `lorem.txt`
+1. Tel het aantal regels, woorden en tekens in `lorem.txt`
 
     ```
-    $ COMMANDO
-      45  404 2738 lorem.txt
+    $ wc lorem.txt
+    45 404 2738 lorem.txt
     ```
 
 2. Herformatteer `lorem.txt` zodat elke tekstregel max. 50 lettertekens bevat en nummer daarna elke (niet-lege) regel. Het resultaat wordt weggeschreven in een nieuw bestand, `nlorem.txt`.
 
     ```
-    $ COMMANDO
+    $ fmt -50 lorem.txt | nl > nlorem.txt
     UITVOER
     ```
 
@@ -188,7 +190,11 @@ Deze oefeningen gebeuren met `lorem.txt`
     - Sorteer op het aantal voorkomens en behoud de alfabetische sortering van de woorden
 
     ```
-    $ COMMANDO
+    $ cat lorem.txt | tr ' ' '\n' | sed '/^,.$/d' | sort
+
+fsdfs
+,.
+qsfqsf
      11 sed 
      10 et 
       8 quis 
@@ -286,7 +292,7 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 
 * [Vim Wikia Copy, cut & paste](http://vim.wikia.com/wiki/Copy,_cut_and_paste)
 
-* [VIM cheatsheet](www.worldtimzone.com/res/vi.html)
+* [VIM cheatsheet](http://www.worldtimzone.com/res/vi.html)
 
 * [Wow! I Didn't Know You Could Do That In vi](https://www.eskimo.com/~pbender/misc-non/vi-help.txt)
 
