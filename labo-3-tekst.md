@@ -71,7 +71,7 @@ Maak ook een bestand aan met de naam `autokentekens` met deze inhoud:
     | Van de cursor tot het einde van de regel    | `df$`      |
     | Tot het einde van de *zin*                  | `d)`      |
     | Tot het einde van de *paragraaf*            | `d}`      |
-    | Alle tekst tussen haakjes `(...)`           | `di)`      |
+    | Alle tekst tussen haakjes `(...)`           | `di)` `d%`      |
 
 6. Hoe kan je gekopieerde/geknipte tekst plakken?
 
@@ -190,11 +190,7 @@ Deze oefeningen gebeuren met `lorem.txt`
     - Sorteer op het aantal voorkomens en behoud de alfabetische sortering van de woorden
 
     ```
-    $ cat lorem.txt | tr ' ' '\n' | sed '/^,.$/d' | sort
-
-fsdfs
-,.
-qsfqsf
+    $ cat lorem.txt | tr ' ' '\n' | tr -d ,. | grep -v '^$' | sort | uniq -c -i | sort -k1nr -k2
      11 sed 
      10 et 
       8 quis 
@@ -217,7 +213,7 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 1. Schrijf in `users.txt` een gesorteerde lijst weg van gebruikers met een UID strikt groter dan 1000 (tip: gebruik hiervoor `awk`).
 
     ```
-    $ COMMANDO
+    $ awk -F: '{if ($3>1000) {print $1}}' passwd | sort > users.txt 
     $ cat users.txt
     roberts
     ryu
@@ -230,20 +226,20 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 2. Tel het aantal gebruikers in `users.txt`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ wc -l users.txt
+    6 users.txt
     ```
 
 3. Genereer voor elke gebruiker in `users.txt` een nieuw wachtwoord m.h.v. het commando `apg -n AANTAL` en schrijf deze weg in `newpass.txt`. Het aantal gebruikers in `users.txt` wordt berekend in de opdrachtregel.  Tip: gebruik "command substitution," notatie `$(commando)`. Dit zal het gegeven commando uitvoeren en de uitdrukking `$(...)` vervangen door de uitvoer (stdout) ervan.
 
     ```
-    $ COMMANDO
+    $ apg -n $(wc -l users.txt) > newpass.txt
     ```
 
 4. Maak een tekstbestand `newusers.txt` met daarin de lijst van gebruikers uit `users.txt` en hun overeenkomstige wachtwoord uit `newpass.txt`, gescheiden door een TAB, vb:
 
     ```
-    $ COMMANDO
+    $ paste users.txt newpass.txt > newusers.txt (paste gebruikt standaard tabs)
     $ cat newusers.txt
     roberts hewpopIrb6
     ryu     vicNimEp
@@ -256,7 +252,7 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 5. Converteer `newusers.txt` naar een CSV-bestand `newusers.csv` waar de inhoud van elke kolom omgeven is door dubbele aanhalingstekens en gescheiden door een kommapunt.
 
     ```
-    $ COMMANDO
+    $ cat newusers.txt | sed 's/^/"/; s/\t/";"/; s/$/"/' > newusers.csv
     $ cat newusers.csv
     "roberts";"hewpopIrb6"
     "ryu";"vicNimEp"
@@ -269,7 +265,7 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 6. Druk een lijst af van de gebruikers in `passwd` die Bash als shell hebben, samen met hun UID en home-directory. Sorteer op UID.
 
     ```
-    $ COMMANDO
+    $ awk -F: '{if ($7=="/bin/bash") {printf("%s:%s:%s\n",$1,$3,$6)}}' passwd > usersbash.txt
     root:0:/root
     vagrant:1000:/home/vagrant
     student:1001:/home/student
@@ -297,3 +293,5 @@ Vele tekstbestanden zijn gestructureerd als tabellen, bv. CSV (comma-separated v
 * [Wow! I Didn't Know You Could Do That In vi](https://www.eskimo.com/~pbender/misc-non/vi-help.txt)
 
 * [Key for VI/VIM](https://in-the-sky.org/work/vi.php)
+
+* [How to use AWK](https://www.digitalocean.com/community/tutorials/how-to-use-the-awk-language-to-manipulate-text-in-linux)
