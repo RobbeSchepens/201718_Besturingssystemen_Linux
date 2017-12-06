@@ -165,43 +165,43 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - In welk configuratiebestand vind je het GID van deze groep terug?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ cat /etc/group
+        sporten:x:1002:
         ```
 
     - Wat zal het GID zijn van de groepen `zwemmen` en `judo` als je deze nu onmiddellijk zou aanmaken? Maak ze aan en controleer!
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ cat group
+        
         ```
 
     - Voeg de gebruiker `alice` toe aan de groepen `sporten` en `zwemmen`
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo usermod -G zwemmen,sporten alice
+        
         ```
 
     - Log in als `alice` door in een terminal het commando `su - alice` (let op de spaties!) uit te voeren
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ su - alice
+        
         ```
 
     - Zorg er nu voor dat de groep `sporten` de primaire groep wordt van `alice`.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo usermod -g sporten alice
+        
         ```
 
     - Zorg er voor dat `alice` uitgelogd is, ga terug naar `root`
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ exit
+        
         ```
 
 6. Maak nu de gebruikers in onderstaande tabel aan. Zorg er voor dat ze al meteen bij aanmaken tot de aangegeven groepen behoren. Kies zelf geschikte wachtwoorden voor deze gebruikers en vergeet ze niet (vul eventueel een kolom toe aan de tabel).
@@ -216,81 +216,84 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Geef de gebruikte commando's om de gebruikers aan te maken en ook om te verifiëren of dit correct gebeurd is:
 
         ```
-        $ COMMANDO
-        UITVOER
-        $ COMMANDO
-        UITVOER
+        $ sudo adduser bob -g sporten
+        $ groupadd judo
+        $ sudo usermod -G judo bob
+        
         ...
         ```
 
     - Verwijder nu de *groep* `alice` en controleer.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo groupdel alice
+        groupdel: cannot remove the primary group of user 'alice'
         ```
+
+        > You may not remove the primary group of any existing user; you must remove the user before you remove that user's primary group.
 
     - Gebruiker `daniel` gaat een tijdje niet meer sporten. Zorg er voor dat deze gebruiker tot nader order geen toegang meer kan hebben tot het systeem (zonder het wachtwoord of de gebruiker te verwijderen!).
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo usermod -L daniel
+        
         ```
 
     - Hoe kan je controleren dat `daniel` inderdaad geen toegang meer heeft tot het systeem? In welk bestand kan dat en hoe zie je daar dan dat het account afgesloten is?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo cat /etc/shadow
+        carol:!!:17506:0:99999:7:::
+        daniel:!:17506:0:99999:7:::
+        Uitroepteken minder.
         ```
 
     - Gebruiker `daniel` komt terug naar de sportclub. Geef hem opnieuw toegang tot het systeem.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo usermod -U daniel
+        
         ```
 
     - Gebruiker `eva` stopt helemaal met sporten. Verwijder deze gebruiker, maar doe dit zorgvuldig: zorg er in het bijzonder voor dat ook haar homedirectory verwijderd wordt.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ sudo userdel -r eva
+        
         ```
 
 7. Log aan als de gebruiker `carol`
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ su - carol
+    
     ```
 
     - Controleer of je in de “thuismap” bent van deze gebruiker. Maak onder deze map een bestand `test` aan door middel van het commando `touch`.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ touch test
+        
         ```
 
     - Probeer nu als gebruiker `carol` je te verplaatsen naar de “thuismap” van `alice`.
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ cd ../alice
+        Premission denied.
         ```
 
     - Kan je de inhoud van de mappen binnen de thuismap van `alice` bekijken?
 
         ```
-        $ COMMANDO
-        UITVOER
+        No.
         ```
 
     - Probeer nu als `carol` onder de “thuismap” van `alice` ook een bestand `test` te maken. Lukt dit? Kan je dit verklaren?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ touch ../alice/test
+        Permission denied.
         ```
 
 ## Statements uit pretest
