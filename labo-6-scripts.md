@@ -70,10 +70,71 @@ De unit tests van de oefeningen worden in volgorde uitgevoerd. Zolang er nog fou
     een
     test
     ```
+    
+    ```
+    while (( $# >= 1 ));
+    do
+        echo $1
+        shift
+    done
+    ```
+
+    ```
+    while [ $# -gt 0 ]
+    do
+        echo "$1"
+        shift
+    done
+    ```
 
 2. Schrijf een script `gebruikerslijst.sh` dat een gesorteerde lijst van users (uit `/etc/passwd`) weergeeft op het scherm. Maak gebruik van het het commando `cut`.
+
+    ```
+    cut -d":" -f1 /etc/passwd | grep "home" | sort
+    ```
+
 3. Schrijf een script `elf-params.sh` dat maximaal 11 parameters kan weergeven op het scherm. Positionele parameters en `shift` zijn een tip.
+
+    ```
+    a=0
+    while [ $a -lt 11 ] && [ $# -gt 0 ]
+    do
+        echo $1
+        shift
+        a=$((a+1))
+    done
+    ```
+
 4. Schrijf een script `datum.sh` dat het aantal elementen van het commando `date` weergeeft en daarna al de elementen onder elkaar. Maak gebruik van positionele parameters en het `set` commando. Gebruik ook een `while`-lus.
+
+
+
+
+cal.sh
+    ```
+    months=( jan feb maa )
+    req_month=0
+    for i in $(seq 0 11); do
+        if [ "${months[$i]}" = "${1}" ]; then
+            req_month=$(( i + 1 ))
+            break
+        fi
+    done
+    if [ $req_month -eq 0 ]; then
+        echo "ERROR: first must be one of ${months}" >&2
+        usage
+        exit 2
+    fi
+
+    if [ $# -lt 2 ]; then
+        req_year=$(date|cut -d' ' -f6)
+    else
+        req_year=${2}
+    if
+
+    cal ${req_month} ${req_year}
+    ```
+
 5. Vraag aan de gebruiker van dit script een naam voor een bestand, schrijf dit vervolgens weg en zorg ervoor dat het bestand uitvoerbaar is. (opm. geen unit tests)
 6. Dit script zal een bestand kopiëren. Bron en doel worden aan de gebruiker gevraagd. Test of het doelbestand bestaat. Indien wel, wordt het script afgebroken.  (opm. geen unit tests)
 7. Sorteer de inhoud van een bestand (arg1) en toon de laatste regels (aantal regels = arg2). Indien argument 1 ontbreekt, melding geven en afbreken. Indien argument 2 ontbreekt neemt men 20 als default waarde. Om te testen maak je een bestand aan met alle letters van het alfabet, in de volgorde van je toetsenbord. (opm. geen unit tests)
