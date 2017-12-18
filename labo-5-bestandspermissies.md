@@ -161,7 +161,15 @@ Kopieer als je eigen gebruiker (niet als root!) nu opnieuw het bestand `/etc/hos
 1. Maak als `root` onder `/srv/` twee directories aan met de naam `groep/verkoop` en `groep/inkoop`. Maak ook 2 groepen aan met de namen `verkoop` en `inkoop`. Maak twee gebruikers aan, `margriet` met primaire groep `verkoop` en `roza`, die als primaire groep `inkoop` heeft. Zorg dat de groepen eigenaar zijn van de overeenkomstige directories en dat `margriet` eigenaar is van directory `verkoop` en `roza` van het directory `inkoop`. Geef de gebruikte commando’s en controleer:
 
     ```
-    # COMMANDO
+    # $ mkdir -p groep/{verkoop,inkoop}
+    $ groupadd verkoop
+    $ groupadd inkoop
+    $ useradd roza
+    $ useradd margriet
+    $ gpasswd -a margriet verkoop
+    $ gpasswd -a roza inkoop
+    $ chown roza:inkoop inkoop
+    $ chown margriet:verkoop verkoop
     UITVOER
     ...
     # ls -l groep/
@@ -173,77 +181,84 @@ Kopieer als je eigen gebruiker (niet als root!) nu opnieuw het bestand `/etc/hos
 2. Zorg ervoor dat gebruikers en groepen uit de vorige stap alle permissies hebben. Geef het geschikte commando en controleer.
 
     ```
-    $ COMMANDO
+    $ chmod 770 inkoop
+    $ chmod 770 verkoop
     UITVOER
     ```
 
 3. Voeg een gebruiker, vb `alice`, toe aan de groep `inkoop` en `verkoop` en controleer. Geen van beide groepen zijn primair.
 
     ```
-    $ COMMANDO
+    $ gpasswd -a alice inkoop
     UITVOER
     ```
 
 4. Log in als `alice` en ga naar de directory verkoop. Laat de gebruiker hier een leeg bestand, `bestand1`, aanmaken in de directory verkoop. (Indien je hier problemen ondervindt, log dan in via een andere terminalvenster).
 
     ```
-    $ COMMANDO
+    $ touch /srv/groep/inkoop/bestand1
     UITVOER
     ```
 
 5. Wie is nu eigenaar van `bestand1` en wie de groepseigenaar?
 
     ```
-    $ COMMANDO
+    $ ls -l
     UITVOER
     ```
 
 6. Zorg er nu voor dat de groepseigenaar van de directory `verkoop` automatisch de groepseigenaar wordt van alle bestanden en directories die onder `verkoop` gemaakt worden. Geef de gebruikte commando’s.
 
     ```
-    $ COMMANDO
+    $ sudo -
+    chmod 2770 verkoop
+    chgrp verkoop verkoop
     UITVOER
     ```
 
 7. Doe hetzelfde voor de directory `inkoop`. Geef de gebruikte commando’s:
 
     ```
-    $ COMMANDO
+    $ sudo -
+    chmost 2770 inkoop
+    chgrp inkoop inkoop
     UITVOER
     ```
 
 8. Verander opnieuw naar gebruiker `alice` en laat deze gebruiker een leeg `bestand2` aanmaken in de directory `verkoop`. Geef de gebruikte commando’s:
 
     ```
-    $ COMMANDO
+    $ su - alice
+    touch /srv/group/verkoop/bestand2
     UITVOER
     ```
 
 9. Wie is nu eigenaar van `bestand2` en wie groepseigenaar?
 
     ```
-    $ COMMANDO
-    UITVOER
+    $ ls -l
+    - rw........ alice verkoop 0 20 dec........ bestand2
     ```
 
 10. Laat nu gebruiker `margriet` een leeg bestand `bestand3` aanmaken. Controleer de eigenaar van `bestand3` en de groepseigenaar.
 
     ```
-    $ COMMANDO
+    $ su - margriet
+    touch /srv/group/verkoop/bestand3
     UITVOER
     ```
 
 11. Laat nu gebruiker `alice` `bestand3` verwijderen. Lukt dit?
 
     ```
-    $ COMMANDO
+    $ rm bestand3 
     UITVOER
     ```
 
 12. Zorg er nu voor dat de gebruikers elkaars bestanden niet kunnen verwijderen. Als de gebruiker echter eigenaar is van het betreffende directory mag dit wel. Leg uit hoe je dit doet en controleer. Schrijf je gevolgde procedure op.
 
     ```
-    $ COMMANDO
+    $ chmod +t verkoop
     UITVOER
     ```
 
